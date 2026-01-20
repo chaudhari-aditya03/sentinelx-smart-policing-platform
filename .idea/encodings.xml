@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/sentinelx-business/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sentinelx-business/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sentinelx-core-model/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sentinelx-core-model/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sentinelx-data-access/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sentinelx-data-access/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sentinelx-security/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sentinelx-security/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sentinelx-web-controller/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sentinelx-web-controller/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sentinelx-web-ui/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sentinelx-web-ui/src/main/resources" charset="UTF-8" />
+  </component>
+</project>
