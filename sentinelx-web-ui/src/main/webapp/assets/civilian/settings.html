@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - SentinelX Citizen Safety Portal</title>
+    <meta name="description" content="Manage your account settings and preferences.">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            blue: '#1E40AF',
+                            light: '#2563EB',
+                            dark: '#1E293B',
+                            accent: '#FB923C',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        
+        .glass-header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased font-sans">
+
+    <!-- NAVBAR -->
+    <nav class="fixed w-full top-0 z-50 glass-header border-b border-gray-200 shadow-sm h-16">
+        <div class="flex items-center justify-between h-full px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-4">
+                <a href="citizen-dashboard.html" class="flex items-center gap-2">
+                    <span class="text-3xl">🚔</span>
+                    <div class="flex flex-col leading-none">
+                        <span class="font-bold text-xl text-brand-blue">SentinelX</span>
+                        <span class="text-[9px] text-brand-dark uppercase tracking-widest font-semibold">Citizen Portal</span>
+                    </div>
+                </a>
+            </div>
+            <div class="flex items-center gap-4">
+                <!-- Language Selector -->
+                <div class="relative group">
+                    <button onclick="toggleLanguage()" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-slate-100 transition">
+                        <svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" /></svg>
+                        <span class="text-sm font-medium text-slate-700" id="current-lang">English</span>
+                        <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                    </button>
+                    <div id="language-dropdown" class="hidden absolute right-0 mt-2 w-40 bg-white rounded-xl shadow-xl border border-gray-100 z-50 overflow-hidden">
+                        <button onclick="changeLanguage('en')" class="w-full text-left px-4 py-3 text-sm hover:bg-blue-50 transition flex items-center gap-2">
+                            <span class="text-lg">🇬🇧</span>
+                            <span>English</span>
+                        </button>
+                        <button onclick="changeLanguage('hi')" class="w-full text-left px-4 py-3 text-sm hover:bg-blue-50 transition flex items-center gap-2 border-t">
+                            <span class="text-lg">🇮🇳</span>
+                            <span>हिंदी</span>
+                        </button>
+                    </div>
+                </div>
+                <a href="citizen-dashboard.html" class="text-sm font-medium text-slate-600 hover:text-brand-blue" data-i18n="backToDashboard">← Back to Dashboard</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-1 w-full p-4 md:p-8 pt-24 max-w-4xl mx-auto overflow-x-hidden">
+        
+        <h1 class="text-3xl font-bold text-slate-900 mb-8">Settings</h1>
+
+        <!-- Notification Preferences -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8 mb-8">
+            <h3 class="text-xl font-bold text-slate-900 mb-6">Notification Preferences</h3>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                    <div>
+                        <p class="font-medium text-slate-900">Email Notifications</p>
+                        <p class="text-sm text-slate-500">Receive updates via email</p>
+                    </div>
+                    <input type="checkbox" checked class="w-5 h-5 rounded border-gray-300 text-brand-blue cursor-pointer" />
+                </div>
+                <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                    <div>
+                        <p class="font-medium text-slate-900">SMS Notifications</p>
+                        <p class="text-sm text-slate-500">Get alerts via text message</p>
+                    </div>
+                    <input type="checkbox" checked class="w-5 h-5 rounded border-gray-300 text-brand-blue cursor-pointer" />
+                </div>
+                <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                    <div>
+                        <p class="font-medium text-slate-900">Push Notifications</p>
+                        <p class="text-sm text-slate-500">Receive browser notifications</p>
+                    </div>
+                    <input type="checkbox" checked class="w-5 h-5 rounded border-gray-300 text-brand-blue cursor-pointer" />
+                </div>
+                <div class="flex items-center justify-between py-3">
+                    <div>
+                        <p class="font-medium text-slate-900">Complaint Updates</p>
+                        <p class="text-sm text-slate-500">Notifications about your complaints</p>
+                    </div>
+                    <input type="checkbox" checked class="w-5 h-5 rounded border-gray-300 text-brand-blue cursor-pointer" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Privacy Settings -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8 mb-8">
+            <h3 class="text-xl font-bold text-slate-900 mb-6">Privacy Settings</h3>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                    <div>
+                        <p class="font-medium text-slate-900">Public Profile</p>
+                        <p class="text-sm text-slate-500">Allow others to see your profile</p>
+                    </div>
+                    <input type="checkbox" class="w-5 h-5 rounded border-gray-300 text-brand-blue cursor-pointer" />
+                </div>
+                <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                    <div>
+                        <p class="font-medium text-slate-900">Show Complaint History</p>
+                        <p class="text-sm text-slate-500">Public complaint statistics</p>
+                    </div>
+                    <input type="checkbox" class="w-5 h-5 rounded border-gray-300 text-brand-blue cursor-pointer" />
+                </div>
+                <div class="flex items-center justify-between py-3">
+                    <div>
+                        <p class="font-medium text-slate-900">Data Collection</p>
+                        <p class="text-sm text-slate-500">Allow usage analytics</p>
+                    </div>
+                    <input type="checkbox" checked class="w-5 h-5 rounded border-gray-300 text-brand-blue cursor-pointer" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Language & Region -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8 mb-8">
+            <h3 class="text-xl font-bold text-slate-900 mb-6">Language & Region</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Language</label>
+                    <select class="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:ring-2 focus:ring-brand-blue focus:border-transparent">
+                        <option>English</option>
+                        <option>हिंदी (Hindi)</option>
+                        <option>मराठी (Marathi)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Timezone</label>
+                    <select class="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:ring-2 focus:ring-brand-blue focus:border-transparent">
+                        <option>IST (Indian Standard Time)</option>
+                        <option>GMT</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Display Settings -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8 mb-8">
+            <h3 class="text-xl font-bold text-slate-900 mb-6">Display Settings</h3>
+            <div class="space-y-4">
+                <div>
+                    <label class="text-sm font-semibold text-slate-700">Theme</label>
+                    <div class="flex gap-4 mt-3">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="theme" value="light" checked />
+                            <span class="text-sm text-slate-600">Light</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="theme" value="dark" />
+                            <span class="text-sm text-slate-600">Dark</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="theme" value="auto" />
+                            <span class="text-sm text-slate-600">Auto</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="border-t border-gray-100 pt-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="font-medium text-slate-900">Compact View</p>
+                            <p class="text-sm text-slate-500">Reduce spacing and padding</p>
+                        </div>
+                        <input type="checkbox" class="w-5 h-5 rounded border-gray-300 text-brand-blue cursor-pointer" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Save Settings -->
+        <div class="flex gap-4">
+            <button class="px-8 py-2.5 bg-brand-blue text-white font-medium rounded-lg hover:bg-blue-700">Save Settings</button>
+            <button class="px-8 py-2.5 border border-gray-200 text-slate-700 font-medium rounded-lg hover:bg-slate-50">Reset to Default</button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-brand-blue text-white mt-16">
+        <div class="text-center py-6 text-sm text-slate-200">
+            © 2026 SentinelX Citizen Safety Portal. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Language Toggle Function
+        function toggleLanguage() {
+            const dropdown = document.getElementById('language-dropdown');
+            dropdown.classList.toggle('hidden');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const langDropdown = document.getElementById('language-dropdown');
+            if (!event.target.closest('.group') && langDropdown) {
+                langDropdown.classList.add('hidden');
+            }
+        });
+    </script>
+    <script src="../js/language.js"></script>
+</body>
+</html>
