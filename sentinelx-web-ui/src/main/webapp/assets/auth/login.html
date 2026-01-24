@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Login to the SentinelX Citizen Safety Portal to access your dashboard." />
+  <title>Login – SentinelX Citizen Safety Portal</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              blue: '#1E40AF',
+              light: '#2563EB',
+              dark: '#1E293B',
+              accent: '#FB923C'
+            },
+            emergency: '#DC2626',
+            success: '#16A34A'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body class="bg-slate-50 text-brand-dark antialiased">
+
+  <!-- ================= Navbar ================= -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Logo -->
+        <div class="flex items-center space-x-2 cursor-pointer" onclick="location.href='../../index.html'">
+          <span class="text-3xl">🚔</span>
+          <div class="leading-tight">
+            <div class="text-xl font-bold text-brand-blue tracking-tight">SentinelX</div>
+            <div class="text-[10px] uppercase text-slate-500 font-semibold tracking-widest">Citizen Safety Portal</div>
+          </div>
+        </div>
+
+        <!-- Desktop Links -->
+        <div class="hidden md:flex items-center space-x-6 text-sm font-medium">
+          <!-- Language Selector -->
+          <div class="relative group">
+            <button onclick="toggleLanguage()" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-slate-100 transition">
+              <svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" /></svg>
+              <span class="text-sm font-medium text-slate-700" id="current-lang">English</span>
+              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+            </button>
+            <div id="language-dropdown" class="hidden absolute right-0 mt-2 w-40 bg-white rounded-xl shadow-xl border border-gray-100 z-50 overflow-hidden">
+              <button onclick="changeLanguage('en')" class="w-full text-left px-4 py-3 text-sm hover:bg-blue-50 transition flex items-center gap-2">
+                <span class="text-lg">🇬🇧</span>
+                <span>English</span>
+              </button>
+              <button onclick="changeLanguage('hi')" class="w-full text-left px-4 py-3 text-sm hover:bg-blue-50 transition flex items-center gap-2 border-t">
+                <span class="text-lg">🇮🇳</span>
+                <span>हिंदी</span>
+              </button>
+            </div>
+          </div>
+          <a href="../../index.html" class="text-slate-600 hover:text-brand-blue transition" data-i18n="home">Home</a>
+          <a href="../file-complaint.jsp" class="text-slate-600 hover:text-brand-blue transition" data-i18n="fileComplaint">File Complaint</a>
+          <a href="../../index.html#track-status" class="text-slate-600 hover:text-brand-blue transition" data-i18n="trackComplaint">Track Complaint</a>
+          <a href="../../index.html#emergency" class="text-slate-600 hover:text-brand-blue transition" data-i18n="emergency">Emergency</a>
+          <span class="px-3 py-2 rounded-lg bg-blue-100 text-brand-blue font-semibold" data-i18n="login">Login</span>
+        </div>
+
+        <!-- Mobile Hamburger -->
+        <button class="md:hidden p-2 rounded-lg text-slate-600 hover:text-brand-blue hover:bg-slate-100" aria-label="Toggle menu" onclick="toggleMobileMenu()">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg border-t border-slate-200">
+      <div class="px-4 py-3 space-y-2 text-sm font-medium">
+        <a href="../../index.html" class="block px-3 py-2 rounded-md hover:bg-slate-100">Home</a>
+        <a href="../file-complaint.jsp" class="block px-3 py-2 rounded-md hover:bg-slate-100">File Complaint</a>
+        <a href="../../index.html#track-status" class="block px-3 py-2 rounded-md hover:bg-slate-100">Track Complaint</a>
+        <a href="../../index.html#emergency" class="block px-3 py-2 rounded-md hover:bg-slate-100">Emergency</a>
+        <span class="block px-3 py-2 rounded-md bg-blue-50 text-brand-blue font-semibold">Login</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Spacer for fixed nav -->
+  <div class="h-16"></div>
+
+  <!-- ================= Main Login Section ================= -->
+  <main class="min-h-screen flex items-center justify-center px-4 py-12 bg-slate-50">
+    <div class="w-full max-w-md bg-white rounded-2xl shadow-xl border border-slate-100 p-8 space-y-6">
+      <div class="text-center space-y-2">
+        <h1 class="text-3xl font-bold text-brand-dark">Welcome Back</h1>
+        <p class="text-slate-500">Login to access your dashboard</p>
+      </div>
+
+      <!-- Success toast placeholder -->
+      <div id="login-success" class="hidden rounded-lg bg-green-50 border border-green-200 text-success text-sm px-4 py-3">Login validated. Ready to submit.</div>
+
+      <!-- Login Form -->
+      <form id="login-form" class="space-y-4" action="#" method="POST" novalidate>
+        <div class="space-y-1">
+          <label class="block text-sm font-semibold text-slate-700">Username / Email / Phone</label>
+          <input type="text" name="username" placeholder="Enter username, email, or phone" class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:ring-2 focus:ring-brand-blue focus:border-transparent" required />
+          <p class="text-xs text-emergency hidden" id="login-username-error"></p>
+        </div>
+        <div class="space-y-1">
+          <label class="block text-sm font-semibold text-slate-700">Login as</label>
+          <select name="role" class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:ring-2 focus:ring-brand-blue focus:border-transparent" required>
+            <option value="civilian" selected>Civilian</option>
+            <option value="police_officer">Police Officer</option>
+            <option value="head_officer">Head Officer</option>
+            <option value="admin">Admin / Analytics</option>
+          </select>
+          <p class="text-xs text-emergency hidden" id="login-role-error"></p>
+        </div>
+        <div class="space-y-1">
+          <label class="block text-sm font-semibold text-slate-700">Password</label>
+          <div class="relative">
+            <input type="password" name="password" placeholder="Password" class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:ring-2 focus:ring-brand-blue focus:border-transparent pr-10" required />
+            <button type="button" class="absolute inset-y-0 right-3 flex items-center text-slate-500" onclick="togglePassword(this)">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+            </button>
+          </div>
+          <p class="text-xs text-emergency hidden" id="login-password-error"></p>
+        </div>
+        <div class="flex items-center justify-between text-sm">
+          <label class="inline-flex items-center gap-2 text-slate-600">
+            <input type="checkbox" class="rounded border-slate-300 text-brand-blue focus:ring-brand-blue" />
+            Remember me
+          </label>
+          <a href="#" class="text-brand-blue hover:underline">Forgot Password?</a>
+        </div>
+        <button type="submit" class="w-full bg-brand-blue hover:bg-blue-700 text-white font-semibold py-3 rounded-lg shadow-md transition">Login</button>
+      </form>
+
+      <!-- Links -->
+      <div class="text-center text-sm space-y-2">
+        <p class="text-slate-600">New Citizen? <a href="register.html" class="text-brand-blue font-semibold hover:underline">Register here</a></p>
+       </div>
+
+      <!-- Police / Staff Note -->
+      <div class="rounded-xl border border-blue-100 bg-blue-50 text-center text-sm text-slate-700 px-4 py-3">
+        <div class="font-semibold text-brand-blue">Police / Staff Login</div>
+        <div class="text-xs text-slate-600">Use your official credentials. If you don't have an account, contact your administrator.</div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ================= Footer ================= -->
+  <footer class="bg-brand-blue text-white mt-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center md:text-left text-sm">
+        <div>
+          <div class="text-slate-200">Police</div>
+          <div class="text-2xl font-bold">100</div>
+        </div>
+        <div>
+          <div class="text-slate-200">Fire</div>
+          <div class="text-2xl font-bold">101</div>
+        </div>
+        <div>
+          <div class="text-slate-200">Ambulance</div>
+          <div class="text-2xl font-bold">108</div>
+        </div>
+        <div>
+          <div class="text-slate-200">Women Helpline</div>
+          <div class="text-2xl font-bold">181</div>
+        </div>
+      </div>
+      <div class="flex flex-wrap items-center justify-between gap-4 text-sm text-slate-200 border-t border-blue-700 pt-4">
+        <div class="flex items-center gap-2">
+          <span class="text-lg">🚔</span>
+          <span class="font-semibold">SentinelX Citizen Safety Portal</span>
+        </div>
+        <div class="flex flex-wrap gap-4">
+          <a href="#" class="hover:text-white">Privacy Policy</a>
+          <a href="#" class="hover:text-white">Terms</a>
+          <a href="#" class="hover:text-white">About</a>
+        </div>
+        <div class="text-xs text-slate-300">© 2026 SentinelX Citizen Safety Portal</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= Scripts ================= -->
+  <script>
+    // Mobile menu toggle
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    }
+
+    // Password show/hide
+    function togglePassword(btn) {
+      const input = btn.previousElementSibling;
+      if (input.type === 'password') {
+        input.type = 'text';
+        btn.innerHTML = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.477 0-8.268-2.943-9.542-7a10.05 10.05 0 012.125-3.368m3.2-2.381A9.96 9.96 0 0112 5c4.477 0 8.268 2.943 9.542 7a10.05 10.05 0 01-4.132 5.411M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>';
+      } else {
+        input.type = 'password';
+        btn.innerHTML = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>';
+      }
+    }
+
+    function showError(el, msg) {
+      el.textContent = msg;
+      el.classList.remove('hidden');
+    }
+    function hideError(el) {
+      el.textContent = '';
+      el.classList.add('hidden');
+    }
+
+    // Login validation
+    document.getElementById('login-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      hideError(document.getElementById('login-username-error'));
+      hideError(document.getElementById('login-role-error'));
+      hideError(document.getElementById('login-password-error'));
+      const id = e.target.username.value.trim();
+      const role = e.target.role.value;
+      const pwd = e.target.password.value.trim();
+      let valid = true;
+      if (!id) {
+        showError(document.getElementById('login-username-error'), 'Username / Email / Phone is required');
+        valid = false;
+      }
+      if (!role) {
+        showError(document.getElementById('login-role-error'), 'Select a role to continue');
+        valid = false;
+      }
+      if (!pwd) {
+        showError(document.getElementById('login-password-error'), 'Password is required');
+        valid = false;
+      }
+      if (valid) {
+        const toast = document.getElementById('login-success');
+        toast.classList.remove('hidden');
+        // e.target.submit(); // connect to real endpoint
+      }
+    });
+
+    // Language Toggle Function
+    function toggleLanguage() {
+      const dropdown = document.getElementById('language-dropdown');
+      dropdown.classList.toggle('hidden');
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+      const langDropdown = document.getElementById('language-dropdown');
+      if (!event.target.closest('.group') && langDropdown) {
+        langDropdown.classList.add('hidden');
+      }
+    });
+  </script>
+  <script src="../js/language.js"></script>
+</body>
+</html>
